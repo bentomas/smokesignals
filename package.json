@@ -1,0 +1,9 @@
+{ "name": "smokesignals"
+, "description": "Lightweight event emitting"
+, "version": "0.0.4"
+, "author": "Benjamin Thomas <benjamin@benjaminthomas.org> (http://benjaminthomas.org)"
+, "keywords": ["events", "emitter", "trigger"]
+, "main": "./smokesignals.js"
+, "repository": {"type": "git", "url": "git://github.com/bentomas/smokesignals.git"}
+, "ender": "./ender.js"
+}
