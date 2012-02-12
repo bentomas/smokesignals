@@ -10,7 +10,7 @@ event emitter has.)
 This library has three goals:
 
 1. Make it easy to listen for and initiate events.
-2. Be small. Right now the minified version comes in at 557 bytes (186 bytes
+2. Be small. Right now the minified version comes in at 545 bytes (182 bytes
    gzipped).
 3. Not pollute the global namespace or the objects it modifies with a bunch of
    crap.

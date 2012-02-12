@@ -23,7 +23,7 @@
 
       obj.off = function(eventName, handler, list, i) {
         if (list = listeners[eventName]) {
-          for (i = 0; i < list.length; i++) {
+          for (i = 0; list[i]; i++) {
             if (list[i] == handler || list[i].h == handler) {
               list.splice(i--,1);
             }
@@ -38,7 +38,7 @@
       obj.trigger = function(eventName) {
         var list = listeners[eventName], i = 0;
         if (list) {
-          for(; i < list.length; i++) {
+          for(; list[i]; i++) {
             list[i].apply(obj, list.slice.call(arguments, 1));
           }
         }
