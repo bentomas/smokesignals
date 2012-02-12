@@ -1,10 +1,10 @@
-(function (name, definition) {
-    if (typeof define == 'function') define(definition)
-    else if (typeof module != 'undefined') module.exports = definition()
-    else this[name] = definition()
-})('smokesignals', function() {
+(function (definition, undef) {
+    typeof define == 'function' ? define(definition) :
+      module != undef ?  module.exports = definition() :
+        this['smokesignals'] = definition()
+})(function() {
   return {
-    makeEmitter: function makeEmitter(obj) {
+    convert: function(obj) {
       var listeners = {};
 
       obj.on = function(eventName, handler) {
@@ -13,9 +13,8 @@
       }
 
       obj.once = function(eventName, handler) {
-        function wrappedHandler () {
-          obj.off(eventName, wrappedHandler);
-          return handler.apply(obj, arguments);
+        function wrappedHandler() {
+          return handler.apply(obj.off(eventName, wrappedHandler), arguments);
         }
         wrappedHandler.h = handler;
 
@@ -23,16 +22,13 @@
       }
 
       obj.off = function(eventName, handler, list, i) {
-        list = listeners[eventName];
-        if (list) {
+        if (list = listeners[eventName]) {
           for (i = 0; i < list.length; i++) {
-            if (list[i] === handler
-                || (list[i].h && list[i].h === handler)) {
-              list.splice(i,1);
-              i--;
+            if (list[i] == handler || list[i].h == handler) {
+              list.splice(i--,1);
             }
           }
-          if (list.length === 0) {
+          if (i == 0) {
             delete listeners[eventName];
           }
         }
@@ -40,10 +36,10 @@
       }
 
       obj.trigger = function(eventName) {
-        var list = listeners[eventName];
+        var list = listeners[eventName], i = 0;
         if (list) {
-          for(var i = 0; i < list.length; i++) {
-            list[i].apply(obj, Array.prototype.slice.call(arguments, 1));
+          for(; i < list.length; i++) {
+            list[i].apply(obj, list.slice.call(arguments, 1));
           }
         }
         return obj;

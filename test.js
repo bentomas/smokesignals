@@ -2,7 +2,7 @@ var assert = require('assert');
 var smokesignals = require('./smokesignals.min');
 
 var emitter = {};
-assert.strictEqual(emitter, smokesignals.makeEmitter(emitter));
+assert.strictEqual(emitter, smokesignals.convert(emitter));
 
 var event1count = 0;
 var event1handler = function() { event1count++; };

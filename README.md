@@ -10,7 +10,7 @@ event emitter has.)
 This library has three goals:
 
 1. Make it easy to listen for and initiate events.
-2. Be small. Right now the minified version comes in at 635 bytes (423 bytes
+2. Be small. Right now the minified version comes in at 557 bytes (186 bytes
    gzipped).
 3. Not pollute the global namespace or the objects it modifies with a bunch of
    crap.
@@ -42,12 +42,12 @@ Using
 Make any object an event emitter:
 
     var john = {};
-    smokesignals.makeEmitter(john);
+    smokesignals.convert(john);
 
 Or if you prefer constructors:
 
     function Person() {
-      smokesignals.makeEmitter(this);
+      smokesignals.convert(this);
     }
     var john = new Person();
 
