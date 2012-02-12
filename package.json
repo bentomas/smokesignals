@@ -9,6 +9,5 @@
 , "keywords": ["events", "emitter", "trigger"]
 , "main": "./smokesignals.js"
 , "repository": {"type": "git", "url": "git://github.com/bentomas/smokesignals.git"}
-, "ender": "./ender.js"
 , "scripts": { "test": "node ./test.js" }
 }
