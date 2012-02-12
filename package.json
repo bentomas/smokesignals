@@ -1,6 +1,6 @@
 { "name": "smokesignals"
 , "description": "Really, really lightweight event emitting"
-, "version": "0.0.5"
+, "version": "0.0.6"
 , "author": "Benjamin Thomas <benjamin@benjaminthomas.org> (http://benjaminthomas.org)"
 , "bugs":
   { "url": "https://github.com/bentomas/smokesignals/issues"

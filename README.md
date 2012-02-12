@@ -10,7 +10,7 @@ event emitter has.)
 This library has three goals:
 
 1. Make it easy to listen for and initiate events.
-2. Be small. Right now the minified version comes in at 545 bytes (182 bytes
+2. Be small. Right now the minified version comes in at 544 bytes (181 bytes
    gzipped).
 3. Not pollute the global namespace or the objects it modifies with a bunch of
    crap.
@@ -61,12 +61,16 @@ Now you can listen for events:
 
 And trigger events:
 
-    john.trigger('event name', 'hello world!');
     // alerts "hello world!"
+    john.trigger('event name', 'hello world!');
 
-And stop listening for events:
+And remove a listener:
 
     john.off('event name', myListener);
+
+Or remove all listeners for an event:
+
+    john.off('event name');
 
 Or if you only want to listen for an event once,
 
