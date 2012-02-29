@@ -10,7 +10,7 @@ event emitter has.)
 This library has three goals:
 
 1. Make it easy to listen for and initiate events.
-2. Be small. Right now the minified version comes in at 544 bytes (181 bytes
+2. Be small. Right now the minified version comes in at 542 bytes (181 bytes
    gzipped).
 3. Not pollute the global namespace or the objects it modifies with a bunch of
    crap.
@@ -18,7 +18,7 @@ This library has three goals:
 Installing
 ----------
 
-With npm,
+With npm:
 
     npm install smokesignals
 
@@ -28,11 +28,11 @@ choice in a place you can access from your Node scripts or your webpage.
 Loading
 -------
 
-With Node,
+With Node:
 
     var smokesignals = require('smokesignals');
 
-In the browser include the smokesignals script,
+In the browser include the smokesignals script:
 
     <script src="smokesignals.js"></script>
 
@@ -71,7 +71,7 @@ Or remove all listeners for an event:
 
     john.off('event name');
 
-Or if you only want to listen for an event once,
+Or if you only want to listen for an event once:
 
     john.once('another event', function() {
         window.alert("I'll only be called once!");
@@ -81,14 +81,16 @@ Or if you only want to listen for an event once,
 That's it! One global object (`smokesignals`) and when used it adds 4 methods to
 your objects (`on`, `once`, `off` and `trigger`).
 
-All methods are of couse chainable,
+By the way, all methods are chainable:
 
     john
       .on('event name', function() { ... })
       .on('event two', function() { ... })
       .trigger('event name')
       .once('event three', function() { ... })
-      .off ('event three')
+      .off ('event name')
       ;
+
+[![Build Status](https://secure.travis-ci.org/bentomas/smokesignals.png?branch=master)](http://travis-ci.org/bentomas/smokesignals)
 
 [1]: http://nodejs.org/docs/latest/api/events.html
