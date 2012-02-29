@@ -56,7 +56,6 @@ Now you can listen for events:
     function myListener(msg) {
         window.alert(msg);
     }
-
     john.on('event name', myListener);
 
 And trigger events:
@@ -82,5 +81,14 @@ Or if you only want to listen for an event once,
 That's it! One global object (`smokesignals`) and when used it adds 4 methods to
 your objects (`on`, `once`, `off` and `trigger`).
 
-[1]: http://nodejs.org/docs/latest/api/events.html
+All methods are of couse chainable,
 
+    john
+      .on('event name', function() { ... })
+      .on('event two', function() { ... })
+      .trigger('event name')
+      .once('event three', function() { ... })
+      .off ('event three')
+      ;
+
+[1]: http://nodejs.org/docs/latest/api/events.html
