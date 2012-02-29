@@ -103,3 +103,24 @@ assert.strictEqual(emitter, emitter.trigger('event2'));
 assert.equal(event5count1, 1);
 assert.equal(event5count2, 1);
 assert.equal(event5count3, 1);
+
+// constructor paradigm
+var event6count = 0;
+
+function Obj() {
+  smokesignals.convert(this);
+}
+var obj = new Obj();
+
+var event6handler = function() { event6count++; };
+assert.strictEqual(obj, obj.on('event6', event6handler));
+
+assert.strictEqual(obj, obj.trigger('event6'));
+assert.equal(event6count, 1);
+
+assert.strictEqual(obj, obj.trigger('event6'));
+assert.equal(event6count, 2);
+
+assert.strictEqual(obj, obj.off('event6', event6handler));
+assert.strictEqual(obj, obj.trigger('event6'));
+assert.equal(event6count, 2);
