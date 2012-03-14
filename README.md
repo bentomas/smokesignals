@@ -4,13 +4,13 @@ Smoke Signals
 Really, really lightweight event emitting for Node and the browser.
 
 (though Node already has [event emitting built in][1] so I don't know why you'd
-use this there. This doesn't even have most of the functionallity that Node's
-event emitter has.)
+use this there. This is directly inspired by Node's and doesn't even have most of
+the functionality that Node's event emitter has.)
 
 This library has three goals:
 
 1. Make it easy to listen for and initiate events.
-2. Be small. Right now the minified version comes in at 542 bytes (181 bytes
+2. Be small. Right now the minified version comes in at 462 bytes (154 bytes
    gzipped).
 3. Not pollute the global namespace or the objects it modifies with a bunch of
    crap.
@@ -67,10 +67,6 @@ And remove a listener:
 
     john.off('event name', myListener);
 
-Or remove all listeners for an event:
-
-    john.off('event name');
-
 Or if you only want to listen for an event once:
 
     john.once('another event', function() {
@@ -78,12 +74,21 @@ Or if you only want to listen for an event once:
     });
     john.trigger('another event');
 
+Or remove all listeners for an event:
+
+    john.off('event name');
+
+Or if you want to remove all listeners period:
+
+    // just reconvert the object...
+    smokesignals.convert(john);
+
 That's it! One global object (`smokesignals`) and when used it adds 4 methods to
 your objects (`on`, `once`, `off` and `trigger`).
 
 By the way, all methods are chainable:
 
-    john
+    var john = smokesignals.convert({})
       .on('event name', function() { ... })
       .on('event two', function() { ... })
       .trigger('event name')
