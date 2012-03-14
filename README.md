@@ -4,16 +4,19 @@ Smoke Signals
 Really, really lightweight event emitting for Node and the browser.
 
 (though Node already has [event emitting built in][1] so I don't know why you'd
-use this there. This is directly inspired by Node's and doesn't even have most of
+use this there. This is directly inspired by Node's and doesn't even have all of
 the functionality that Node's event emitter has.)
 
 This library has three goals:
 
-1. Make it easy to listen for and initiate events.
-2. Be small. Right now the minified version comes in at 459 bytes (153 bytes
-   gzipped).
+1. Make it easy and intuitive to listen for and initiate events on an object.
+2. Be really small. Right now the minified version comes in at 459 bytes (153
+   bytes gzipped).
 3. Not pollute the global namespace or the objects it modifies with a bunch of
-   crap.
+   crap. I define crap as anything that is not the API.
+
+There are many other [wonderful libraries that do similar things][2], but none of them
+worked exactly how I wanted them to work or met all the goals above.
 
 Installing
 ----------
@@ -98,3 +101,4 @@ By the way, all methods are chainable:
 [![Build Status](https://secure.travis-ci.org/bentomas/smokesignals.png?branch=master)](http://travis-ci.org/bentomas/smokesignals)
 
 [1]: http://nodejs.org/docs/latest/api/events.html
+[2]: http://microjs.com/#events
