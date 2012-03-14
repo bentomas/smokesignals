@@ -57,7 +57,7 @@
             return obj;
         }
 
-        obj.trigger = function(eventName) {
+        obj.emit = function(eventName) {
             // loop throught all handlers for this event hame and call them all
             for(var list = handlers[eventName], i = 0;list && list[i];) {
                 list[i++].apply(obj, list.slice.call(arguments, 1));

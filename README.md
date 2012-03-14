@@ -10,7 +10,7 @@ the functionality that Node's event emitter has.)
 This library has three goals:
 
 1. Make it easy to listen for and initiate events.
-2. Be small. Right now the minified version comes in at 462 bytes (154 bytes
+2. Be small. Right now the minified version comes in at 459 bytes (153 bytes
    gzipped).
 3. Not pollute the global namespace or the objects it modifies with a bunch of
    crap.
@@ -41,56 +41,56 @@ Using
 
 Make any object an event emitter:
 
-    var john = {};
-    smokesignals.convert(john);
+    var jack = {};
+    smokesignals.convert(jack);
 
 Or if you prefer constructors:
 
     function Person() {
       smokesignals.convert(this);
     }
-    var john = new Person();
+    var jack = new Person();
 
 Now you can listen for events:
 
-    function listener(msg) {
-        window.alert(msg);
+    function listener(name) {
+        window.alert('hello ' + name + '!');
     }
-    john.on('event name', listener);
+    jack.on('say hello', listener);
 
-And trigger events:
+And emit events:
 
-    john.trigger('event name', 'hello world!');
+    jack.emit('say hello', 'jill');
 
 And remove a listener:
 
-    john.off('event name', listener);
+    jack.off('say hello', listener);
 
 Or if you only want to listen for an event once:
 
-    john.once('another event', function() {
+    jack.once('another event', function() {
         window.alert("I'll only be called once!");
     });
-    john.trigger('another event');
+    jack.emit('another event');
 
 Or remove all listeners for an event:
 
-    john.off('event name');
+    jack.off('say hello');
 
-Or if you want to remove all listeners period:
+Or if you want to remove ALL listeners:
 
     // just reconvert the object...
-    smokesignals.convert(john);
+    smokesignals.convert(jack);
 
 That's it! One global object (`smokesignals`) and when used it adds 4 methods to
-your objects (`on`, `once`, `off` and `trigger`).
+your objects (`on`, `once`, `off` and `emit`).
 
 By the way, all methods are chainable:
 
-    var john = smokesignals.convert({})
+    var jack = smokesignals.convert({})
       .on('event one', function() { ... })
       .on('event two', function() { ... })
-      .trigger('event one')
+      .emit('event one')
       .once('event three', function() { ... })
       .off ('event one')
       ;
