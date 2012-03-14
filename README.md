@@ -53,19 +53,18 @@ Or if you prefer constructors:
 
 Now you can listen for events:
 
-    function myListener(msg) {
+    function listener(msg) {
         window.alert(msg);
     }
-    john.on('event name', myListener);
+    john.on('event name', listener);
 
 And trigger events:
 
-    // alerts "hello world!"
     john.trigger('event name', 'hello world!');
 
 And remove a listener:
 
-    john.off('event name', myListener);
+    john.off('event name', listener);
 
 Or if you only want to listen for an event once:
 
@@ -89,11 +88,11 @@ your objects (`on`, `once`, `off` and `trigger`).
 By the way, all methods are chainable:
 
     var john = smokesignals.convert({})
-      .on('event name', function() { ... })
+      .on('event one', function() { ... })
       .on('event two', function() { ... })
-      .trigger('event name')
+      .trigger('event one')
       .once('event three', function() { ... })
-      .off ('event name')
+      .off ('event one')
       ;
 
 [![Build Status](https://secure.travis-ci.org/bentomas/smokesignals.png?branch=master)](http://travis-ci.org/bentomas/smokesignals)
