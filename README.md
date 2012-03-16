@@ -10,7 +10,7 @@ the functionality that Node's event emitter has.)
 This library has three goals:
 
 1. Make it easy and intuitive to listen for and initiate events on an object.
-2. Be really small. Right now the minified version comes in at 459 bytes (153
+2. Be really small. Right now the minified version comes in at 456 bytes (277
    bytes gzipped).
 3. Not pollute the global namespace or the objects it modifies with a bunch of
    crap. I define crap as anything that is not the API.
