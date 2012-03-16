@@ -1,12 +1,15 @@
-// guess if we are in node or not, if not add our smokesignals object to global namespace
-(typeof module == 'object' ? exports : smokesignals = {})
-    // add convert method to our object
-    .convert = function(obj) {
+smokesignals = {
+    convert: function(obj, handlers) {
         // we store the list of handlers as a local variable inside the scope
         // so that we don't have to add random properties to the object we are
         // converting. (prefixing variables in the object with an underscore or
         // two is an ugly solution)
-        var handlers = {};
+        // we declare the variable in the function definition to use two less
+        // characters (as opposed to using 'var ').  I consider this an inelegant
+        // solution since smokesignals.convert.length now returns 2 when it is
+        // really 1, but doing this doesn't otherwise change the functionallity of
+        // this module, so we'll go with it for now
+        handlers = {};
 
         // add a listener
         obj.on = function(eventName, handler) {
@@ -24,7 +27,7 @@
             function wrappedHandler() {
                 // remove ourself, and then call the real handler with the args
                 // passed to this wrapper
-                return handler.apply(obj.off(eventName, wrappedHandler), arguments);
+                handler.apply(obj.off(eventName, wrappedHandler), arguments);
             }
             // in order to allow that these wrapped handlers can be removed by
             // removing the original function, we save a reference to the original
@@ -43,12 +46,11 @@
             for (var list = handlers[eventName], i = 0; handler && list && list[i]; i++) {
                 // either this item is the handler passed in, or this item is a
                 // wrapper for the handler passed in.  See the 'once' function
-                if (list[i] == handler || list[i].h == handler) {
+                list[i] != handler && list[i].h != handler ||
                     // remove it!
                     list.splice(i--,1);
-                }
             }
-            // if i is 0 (so falsy), then there are no items in the array for this
+            // if i is 0 (i.e. falsy), then there are no items in the array for this
             // event name (or the array doesn't exist)
             if (!i) {
                 // remove the array for this eventname (if it doesn't exist then
@@ -60,7 +62,7 @@
 
         obj.emit = function(eventName) {
             // loop through all handlers for this event name and call them all
-            for(var list = handlers[eventName], i = 0;list && list[i];) {
+            for(var list = handlers[eventName], i = 0; list && list[i];) {
                 list[i++].apply(obj, list.slice.call(arguments, 1));
             }
             return obj;
@@ -68,3 +70,4 @@
 
         return obj;
     }
+}
