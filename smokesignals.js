@@ -39,7 +39,7 @@
         obj.off = function(eventName, handler) {
             // loop through all handlers for this eventName, assuming a handler
             // was passed in, to see if the handler passed in was any of them so
-            // we can remove the handler
+            // we can remove it
             for (var list = handlers[eventName], i = 0; handler && list && list[i]; i++) {
                 // either this item is the handler passed in, or this item is a
                 // wrapper for the handler passed in.  See the 'once' function
@@ -51,14 +51,15 @@
             // if i is 0 (so falsy), then there are no items in the array for this
             // event name (or the array doesn't exist)
             if (!i) {
-                // remove the array for this eventname
+                // remove the array for this eventname (if it doesn't exist then
+                // this isn't really hurting anything)
                 delete handlers[eventName];
             }
             return obj;
         }
 
         obj.emit = function(eventName) {
-            // loop through all handlers for this event hame and call them all
+            // loop through all handlers for this event name and call them all
             for(var list = handlers[eventName], i = 0;list && list[i];) {
                 list[i++].apply(obj, list.slice.call(arguments, 1));
             }
