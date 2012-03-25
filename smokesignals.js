@@ -1,20 +1,25 @@
+// in a few cases we've chosen optimizing script length over efficiency of code.
+// I think that is the right choice for this library.  If you're adding and
+// triggering A LOT of events, you might want to use a different library.
 smokesignals = {
     convert: function(obj, handlers) {
         // we store the list of handlers as a local variable inside the scope
         // so that we don't have to add random properties to the object we are
         // converting. (prefixing variables in the object with an underscore or
         // two is an ugly solution)
-        // we declare the variable in the function definition to use two less
-        // characters (as opposed to using 'var ').  I consider this an inelegant
-        // solution since smokesignals.convert.length now returns 2 when it is
-        // really 1, but doing this doesn't otherwise change the functionallity of
-        // this module, so we'll go with it for now
+        //      we declare the variable in the function definition to use two less
+        //      characters (as opposed to using 'var ').  I consider this an inelegant
+        //      solution since smokesignals.convert.length now returns 2 when it is
+        //      really 1, but doing this doesn't otherwise change the functionallity of
+        //      this module, so we'll go with it for now
         handlers = {};
 
         // add a listener
         obj.on = function(eventName, handler) {
             // either use the existing array or create a new one for this event
-            (handlers[eventName] || (handlers[eventName] = []))
+            //      this isn't the most efficient way to do this, but is the shorter
+            //      than other more efficient ways, so we'll go with it for now.
+            (handlers[eventName] = handlers[eventName] || [])
                 // add the handler to the array
                 .push(handler);
 
@@ -43,6 +48,8 @@ smokesignals = {
             // loop through all handlers for this eventName, assuming a handler
             // was passed in, to see if the handler passed in was any of them so
             // we can remove it
+            //      it would be more efficient to stash the length and compare i
+            //      to that, but that is longer so we'll go with this.
             for (var list = handlers[eventName], i = 0; handler && list && list[i]; i++) {
                 // either this item is the handler passed in, or this item is a
                 // wrapper for the handler passed in.  See the 'once' function
@@ -62,6 +69,8 @@ smokesignals = {
 
         obj.emit = function(eventName) {
             // loop through all handlers for this event name and call them all
+            //      it would be more efficient to stash the length and compare i
+            //      to that, but that is longer so we'll go with this.
             for(var list = handlers[eventName], i = 0; list && list[i];) {
                 list[i++].apply(obj, list.slice.call(arguments, 1));
             }
