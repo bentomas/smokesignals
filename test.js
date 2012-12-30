@@ -6,7 +6,7 @@ console.log('test do not pollute node globals when requiring');
         globalKeys.push(key);
     }
 
-    var smokesignals = require('./index');
+    var smokesignals = require('./');
 
     for (var key in global) {
         assert.ok(globalKeys.indexOf(key) > -1);

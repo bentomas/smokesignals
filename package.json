@@ -7,7 +7,7 @@
   , "email": "benjamin@benjaminthomas.org"
   }
 , "keywords": ["events", "emitter", "trigger"]
-, "main": "./index.js"
+, "main": "./smokesignals.min.js"
 , "repository": {"type": "git", "url": "git://github.com/bentomas/smokesignals.git"}
 , "scripts": { "test": "node ./test.js" }
 }
